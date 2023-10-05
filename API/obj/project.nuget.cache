@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "rMcONzq52RMP02w23lxYM/wmubtlViG74RMWoB0ke2gKZX1FroICgn8msrjeRUi2VGT0hlBFO/pKxiHvFyZDvw==",
+  "dgSpecHash": "Saud/d8/EZWuVShPaivqjgylSEe1Ek6jTXaew4DkW3EeaDHxONMfwrsJv0k29ifH2hz5WAOdLuueMfIuxKvf8w==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\cloudinarydotnet\\1.22.0\\cloudinarydotnet.1.22.0.nupkg.sha512",

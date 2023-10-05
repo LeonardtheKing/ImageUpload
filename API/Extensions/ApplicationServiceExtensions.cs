@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API.Helpers;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -70,6 +71,8 @@ Services.AddSwaggerGen(option =>
 });
 
 Services.AddScoped<ITokenService,TokenService>();
+Services.AddScoped<IUserRepository,UserRepository>();
+Services.AddAutoMapper(typeof(AutoMapperProfiles));
 Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      .AddJwtBearer(options=>{
         options.TokenValidationParameters=new TokenValidationParameters

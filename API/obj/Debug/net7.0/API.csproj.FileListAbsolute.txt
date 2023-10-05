@@ -82,3 +82,5 @@ C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Data\Photo.json
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

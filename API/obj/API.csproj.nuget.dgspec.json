@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj": {}
+    "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj": {
+    "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj",
+        "projectPath": "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\API.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\obj\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

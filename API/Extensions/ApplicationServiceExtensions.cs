@@ -18,25 +18,6 @@ namespace API.Extensions
        
          public static IServiceCollection RegisterServices(this IServiceCollection Services,IConfiguration config)
         {
-//          Services.AddControllers();
-// // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// Services.AddEndpointsApiExplorer();
-// Services.AddSwaggerGen();
-
-// Services.AddScoped<ITokenService,TokenService>();
-// Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//      .AddJwtBearer(options=>{
-//         options.TokenValidationParameters=new TokenValidationParameters
-//         {
-//             ValidateIssuerSigningKey=true,
-//             IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("TokenKey").Value)),
-//             ValidateIssuer=false,
-//             ValidateAudience=false
-//         };
-//      });
-// Services.AddDbContext<DataContext>(options =>{
-// options.UseSqlServer (config.GetConnectionString("DefaultConnection"));
-// });
 
             
 //             return Services;
@@ -72,6 +53,8 @@ Services.AddSwaggerGen(option =>
 
 Services.AddScoped<ITokenService,TokenService>();
 Services.AddScoped<IUserRepository,UserRepository>();
+Services.AddScoped<IPhotoService,PhotoService>();
+Services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 Services.AddAutoMapper(typeof(AutoMapperProfiles));
 Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      .AddJwtBearer(options=>{

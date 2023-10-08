@@ -9,7 +9,14 @@
       "LookingFor": "Looking for new friends.",
       "Interests": "Interests here.",
       "City": "City Name",
-      "Country": "Country Name"
+      "Country": "Country Name",
+      "Photos":[ 
+    
+      {
+        "Url": "https://randomuser.me/api/portraits/women/2.jpg",
+        "IsMain": false,
+        "PublicId": "public_id_2"
+      }]
      
   },
   {
@@ -22,7 +29,15 @@
       "LookingFor": "Looking for a partner.",
       "Interests": "Other interests.",
       "City": "Another City",
-      "Country": "Another Country"
+      "Country": "Another Country",
+      "Photos":[
+       
+        {
+          "Url": "https://randomuser.me/api/portraits/women/4.jpg",
+          "IsMain": false,
+          "PublicId": "public_id_4"
+        }
+      ]
       
   },
   {
@@ -35,7 +50,15 @@
     "LookingFor": "Looking for a partner.",
     "Interests": "Other interests.",
     "City": "Another City",
-    "Country": "Another Country"
+    "Country": "Another Country",
+    "Photos":[
+    
+      {
+        "Url": "https://randomuser.me/api/portraits/women/6.jpg",
+        "IsMain": false,
+        "PublicId": "public_id_6"
+      }
+    ]
     
 },
 {
@@ -48,7 +71,13 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+    {
+      "Url": "https://randomuser.me/api/portraits/women/7.jpg",
+      "IsMain": true
+    }
+  ]
   
 },
 {
@@ -61,7 +90,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+   
+    {
+      "Url": "https://randomuser.me/api/portraits/women/9.jpg",
+      "IsMain": true
+    }
+  ]
  
 },
 {
@@ -74,7 +110,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+  
+    {
+      "Url": "https://randomuser.me/api/portraits/women/11.jpg",
+      "IsMain": true
+    }
+  ]
  
 },
 {
@@ -87,7 +130,13 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+    {
+      "Url": "https://randomuser.me/api/portraits/women/12.jpg",
+      "IsMain": false
+    }
+  ]
  
 },
 {
@@ -100,7 +149,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+   
+    {
+      "Url": "https://randomuser.me/api/portraits/men/2.jpg",
+      "IsMain": false
+    }
+  ]
   
 },
 {
@@ -113,7 +169,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+   
+    {
+      "Url": "https://randomuser.me/api/portraits/men/4.jpg",
+      "IsMain": false
+    }
+  ]
 
       
 },
@@ -127,7 +190,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+   
+    {
+      "Url": "https://randomuser.me/api/portraits/men/6.jpg",
+      "IsMain": false
+    }
+  ]
  
 },
 {
@@ -140,7 +210,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+
+    {
+      "Url": "https://randomuser.me/api/portraits/men/8.jpg",
+      "IsMain": false
+    }
+  ]
   
 },
 {
@@ -153,7 +230,14 @@
   "LookingFor": "Looking for a partner.",
   "Interests": "Other interests.",
   "City": "Another City",
-  "Country": "Another Country"
+  "Country": "Another Country",
+  "Photos":[
+   
+    {
+      "Url": "https://randomuser.me/api/portraits/men/10.jpg",
+      "IsMain": false
+    }
+  ]
   
 }
 ]

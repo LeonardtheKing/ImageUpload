@@ -78,28 +78,44 @@ namespace API.Controllers
              
         }
 
+
+
         [HttpPost("add-photo")]
-        public async Task<ActionResult<PhotoDto>>AddPhoto(IFormFile file)
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
         {
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
             var result = await _photoService.AddPhotoAsync(file);
-            if(result.Error != null){
+
+            if (result.Error != null)
+            {
                 return BadRequest(result.Error.Message);
             }
+
             var photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
-                PublicId=result.PublicId
+                PublicId = result.PublicId
             };
-            if(user.Photos.Count==0)
+
+            // Your logic for setting IsMain and adding the photo to the user's collection
+            if (user.Photos.Count == 0)
             {
-                photo.IsMain=true;
+                photo.IsMain = true;
             }
             user.Photos.Add(photo);
-            if(await _userRepository.SaveAllAsync()){
+
+            if (await _userRepository.SaveAllAsync())
+            {
                 return _mapper.Map<PhotoDto>(photo);
             }
+
             return BadRequest("Problem adding Photo");
         }
+
+
+
+
+
+
     }
 }

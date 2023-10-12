@@ -32,9 +32,9 @@ namespace API.Data
 
             context.AppUsers.Add(user);
         }
-        var photoData = await System.IO.File.ReadAllTextAsync("Data/Photo.json");
-        var photos = JsonConvert.DeserializeObject<List<Photo>>(photoData);
-        context.Photos.AddRange(photos);
+        // var photoData = await System.IO.File.ReadAllTextAsync("Data/Photo.json");
+        // var photos = JsonConvert.DeserializeObject<List<Photo>>(photoData);
+        // context.Photos.AddRange(photos);
          await context.SaveChangesAsync();
     }
              

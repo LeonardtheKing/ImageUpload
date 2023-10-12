@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace API.Entities
 {
-    
+
+    [Table("Photos")]
     public class Photo
     {
         public Guid Id { get; set; }

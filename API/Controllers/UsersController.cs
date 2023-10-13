@@ -39,7 +39,7 @@ namespace API.Controllers
             return Ok(usersToReturn);
         }
 
-         [Authorize]   
+        //  [Authorize] 
          [HttpGet("{id}")]
         public async Task<ActionResult<MemberDto>>GetUsers(Guid id)
         {
@@ -49,7 +49,9 @@ namespace API.Controllers
             return Ok(singleUserToReturn);
         }
 
-        [HttpGet("username")]
+        // [HttpGet("{username}", Name="GetUser")]
+        [HttpGet]
+        [Route("username", Name = "GetUsers")]
         [AllowAnonymous]
         public async Task<ActionResult<MemberDto>>GetUserByUsername(string username)
         {
@@ -106,16 +108,74 @@ namespace API.Controllers
 
             if (await _userRepository.SaveAllAsync())
             {
-                return _mapper.Map<PhotoDto>(photo);
+                // return _mapper.Map<PhotoDto>(photo);
+                // return CreatedAtRoute("GetUser",_mapper.Map<PhotoDto>(photo));
+                 return CreatedAtRoute("GetUser",new{Username=user.UserName},_mapper.Map<PhotoDto>(photo));
+
             }
 
             return BadRequest("Problem adding Photo");
         }
 
+        [HttpPut("set-main-photo/{photoId}")]
+public async Task<ActionResult> SetMainPhoto(Guid photoId)
+{
+    var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+    if (user == null)
+    {
+        return NotFound("User not found");
+    }
+
+    var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+    if (photo == null)
+    {
+        return NotFound("Photo not found");
+    }
+
+    if (photo.IsMain)
+    {
+        return BadRequest("This is already your main photo");
+    }
+
+    var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+
+    if (currentMain != null)
+    {
+        currentMain.IsMain = false;
+    }
+
+    photo.IsMain = true;
+
+    if (await _userRepository.SaveAllAsync())
+    {
+        return NoContent();
+    }
+
+    return BadRequest("Failed to set main photo");
+}
 
 
-
-
+        // [HttpPut("set-main-photo/{photoId}")]
+        // public async Task<ActionResult> SetMainPhoto(Guid photoId)
+        // {
+        //     var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        //     // var photo =user.Photos.FirstOrDefault(x=>x.Id==photoId);
+        //     var photo =user.Photos.FirstOrDefault(x=>x.Id==photoId);
+        //     if(photo.IsMain){
+        //         return BadRequest("This is already your main photo");
+        //     }
+        //     var currentMain = user.Photos.FirstOrDefault(x=>x.IsMain);
+        //     if(currentMain!=null){
+        //         currentMain.IsMain=false;
+        //     }
+        //     photo.IsMain=true;
+        //     if(await _userRepository.SaveAllAsync()){
+        //         return NoContent();
+        //     }
+        //     return BadRequest("Failed to return main Photo");
+        // }
 
     }
 }

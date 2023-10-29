@@ -36,6 +36,30 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    SourceUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LikedUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => new { x.SourceUserId, x.LikedUserId });
+                    table.ForeignKey(
+                        name: "FK_Likes_AppUsers_LikedUserId",
+                        column: x => x.LikedUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_AppUsers_SourceUserId",
+                        column: x => x.SourceUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -57,6 +81,11 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Likes_LikedUserId",
+                table: "Likes",
+                column: "LikedUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
                 column: "AppUserId");
@@ -65,6 +94,9 @@ namespace API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Likes");
+
             migrationBuilder.DropTable(
                 name: "Photos");
 

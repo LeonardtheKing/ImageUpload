@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using API.Helpers;
@@ -12,31 +13,31 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace API.Extensions
 {
-   
+
     public static class ApplicationServiceExtensions
     {
-       
-         public static IServiceCollection RegisterServices(this IServiceCollection Services,IConfiguration config)
+
+        public static IServiceCollection RegisterServices(this IServiceCollection Services, IConfiguration config)
         {
 
-            
-//             return Services;
-             Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-Services.AddSwaggerGen(option =>
-{
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
-    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter a valid token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
-    });
-    option.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+
+            //             return Services;
+            Services.AddEndpointsApiExplorer();
+            //builder.Services.AddSwaggerGen();
+            Services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
         {
             new OpenApiSecurityScheme
             {
@@ -48,29 +49,33 @@ Services.AddSwaggerGen(option =>
             },
             new string[]{}
         }
-    });
-});
-
-Services.AddScoped<ITokenService,TokenService>();
-Services.AddScoped<IUserRepository,UserRepository>();
-Services.AddScoped<IPhotoService,PhotoService>();
-Services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-Services.AddAutoMapper(typeof(AutoMapperProfiles));
-Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-     .AddJwtBearer(options=>{
-        options.TokenValidationParameters=new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey=true,
-            IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("TokenKey").Value)),
-            ValidateIssuer=false,
-            ValidateAudience=false
-        };
-     });
-Services.AddDbContext<DataContext>(options =>{
-options.UseSqlServer (config.GetConnectionString("DefaultConnection"));
-});
-     return Services;
+                });
+            });
+            Services.Configure<IdentityOptions>(options =>
+                options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
+            Services.AddScoped<ITokenService, TokenService>();
+            Services.AddScoped<IUserRepository, UserRepository>();
+            Services.AddScoped<IPhotoService, PhotoService>();
+            Services.AddScoped<LogUserActivity>();
+            Services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            Services.AddAutoMapper(typeof(AutoMapperProfiles));
+            Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                 .AddJwtBearer(options =>
+                 {
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidateIssuerSigningKey = true,
+                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("TokenKey").Value)),
+                         ValidateIssuer = false,
+                         ValidateAudience = false
+                     };
+                 });
+            Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            });
+            return Services;
         }
-        
+
     }
 }

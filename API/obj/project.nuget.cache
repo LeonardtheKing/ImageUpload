@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Saud/d8/EZWuVShPaivqjgylSEe1Ek6jTXaew4DkW3EeaDHxONMfwrsJv0k29ifH2hz5WAOdLuueMfIuxKvf8w==",
+  "dgSpecHash": "9S/b8bpR/eFjazuyKjyLB4Oemd/F02iAxiY+ZYNTnrb7/5hI0DM6oUenVAuCZsnMTO0Jm8i72jMWXnQ3L9w4ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\ImageUpload\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\ImageUpload\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

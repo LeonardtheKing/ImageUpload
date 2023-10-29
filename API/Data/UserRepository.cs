@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.OpenApi.Any;
@@ -29,50 +30,64 @@ namespace API.Data
             return member;
         }
 
-        // public Task<IEnumerable<MemberDto>> GetMembersAsync()
-        // {
-        //     var members = 
-        // }
-
-        // public async Task<AppUser> GetUserByIdAsync(Guid id)
-        // {
-        // //    return await _context.AppUsers.FindAsync(id);
-        // var getUserById = await  _context.AppUsers.FindAsync(id).Include()
-        // }
-
-        
-        public async Task<AppUser> GetUserByIdAsync(Guid id)
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            // Use Include to join the AppUsers table with the Photos table
-            var userWithPhotos = await _context.AppUsers
-                .Where(user => user.Id == id)
-                .Include(user => user.Photos) // Assuming there's a navigation property in AppUser for Photos
-                .Select(user => new AppUser
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    KnownAs = user.KnownAs,
-                    Gender = user.Gender,
-                    Introduction = user.Introduction,
-                    Interests = user.Interests,
-                    Country = user.Country,
-                    LookingFor = user.LookingFor,
-                    City = user.City,
-                    Photos = user.Photos.Select(photo => new Photo
-                    {
-                        // Include the properties you want from the Photo entity
-                        Id = photo.Id,
-                        Url = photo.Url,
-                        IsMain = photo.IsMain,
-                        PublicId = photo.PublicId
-                    }).ToList()
-                })
-                .FirstOrDefaultAsync();
+            var query = _context.AppUsers.AsQueryable();
+            //   .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            //   .AsNoTracking()
+            //   .AsQueryable();
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.Gender == userParams.Gender);
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            return userWithPhotos;
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
+            if (userParams.OrderBy == "created")
+            {
+                query = query.OrderByDescending(u => u.Created);
+            }
+            else
+            {
+                query = query.OrderByDescending(u => u.LastActive);
+            }
+             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+            userParams.PageNumber, userParams.PageSize);
+
+            // IQueryable<AppUser> orderedQuery;
+
+            // switch (userParams.OrderBy)
+            // {
+            //     case "created":
+            //         orderedQuery = query.OrderByDescending(u => u.Created);
+            //         break;
+
+            //     default:
+            //         orderedQuery = query.OrderByDescending(u => u.LastActive);
+            //         break;
+            // }
+
+            ///Switch statement in C# 8
+            // query=userParams.OrderBy switch
+            // {
+            //     "created" => query.OrderByDescending(u=>u.Created),
+            //     _=>query.OrderByDescending(u=>u.LastActive)
+            // };
+           
+
         }
-        
-        
+
+        public async Task<AppUser> GetUserByIdAsync(Guid userId)
+        {
+            var user = await _context.AppUsers.FindAsync(userId);
+            return user;
+            // var member = await _context.AppUsers
+            //             .Where(x => x.Id == userId)
+            //             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            //             .SingleOrDefaultAsync();
+            // return member;
+        }
+
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {

@@ -128,13 +128,11 @@ namespace API.Migrations
                     b.HasOne("API.Entities.AppUser", "LikedUser")
                         .WithMany("LikedByUsers")
                         .HasForeignKey("LikedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "SourceUser")
                         .WithMany("LikedUsers")
                         .HasForeignKey("SourceUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LikedUser");

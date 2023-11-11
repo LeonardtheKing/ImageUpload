@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231022213724_First")]
-    partial class First
+    [Migration("20231105142445_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,13 +131,11 @@ namespace API.Migrations
                     b.HasOne("API.Entities.AppUser", "LikedUser")
                         .WithMany("LikedByUsers")
                         .HasForeignKey("LikedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "SourceUser")
                         .WithMany("LikedUsers")
                         .HasForeignKey("SourceUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LikedUser");

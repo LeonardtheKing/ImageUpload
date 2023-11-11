@@ -17,5 +17,7 @@ namespace API.Entities
         [ForeignKey("AppUser")]
         public Guid AppUserId { get; set; }
         public AppUser AppUser{get;set;}
+
+        
     }
 }

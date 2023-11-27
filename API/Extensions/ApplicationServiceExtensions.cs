@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using API.Helpers;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace API.Extensions
 {
@@ -57,6 +52,11 @@ namespace API.Extensions
             Services.AddScoped<IUserRepository, UserRepository>();
             Services.AddScoped<IPhotoService, PhotoService>();
             Services.AddScoped<ILikesRepository, LikesRepository>();
+             Services.AddIdentity<AppUser, AppRole>()
+        .AddEntityFrameworkStores<DataContext>()
+        .AddDefaultTokenProviders();
+            
+           
 
             Services.AddScoped<LogUserActivity>();
             Services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));

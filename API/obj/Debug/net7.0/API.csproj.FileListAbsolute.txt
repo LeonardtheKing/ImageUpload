@@ -84,3 +84,9 @@ C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\admin\Desktop\ImageUpload\api\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

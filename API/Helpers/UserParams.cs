@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Helpers
 {
     //This class handles the request made by the user from the database/server

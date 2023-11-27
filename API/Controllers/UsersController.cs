@@ -1,20 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using API.Data;
-using API.Entities;
 using API.Helpers;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-  
+
     public class UsersController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
@@ -30,7 +19,7 @@ namespace API.Controllers
 
 
          [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>>GetUserById(Guid id)
+        public async Task<ActionResult<AppUser>>GetUserById(int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
             return Ok(user);
@@ -134,7 +123,7 @@ namespace API.Controllers
         }
 
         [HttpPut("set-main-photo/{photoId}")]
-public async Task<ActionResult> SetMainPhoto(Guid photoId)
+public async Task<ActionResult> SetMainPhoto(int photoId)
 {
     var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
@@ -173,7 +162,7 @@ public async Task<ActionResult> SetMainPhoto(Guid photoId)
 }
 
     [HttpDelete("delete-photo/{photoId}")]
-    public async Task<ActionResult>DeletePhoto(Guid photoId)
+    public async Task<ActionResult>DeletePhoto(int photoId)
     {
         var user=await _userRepository.GetUserByUsernameAsync(User.GetUsername());
         var photo = user.Photos.FirstOrDefault(x=>x.Id==photoId);

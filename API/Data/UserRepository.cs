@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.OpenApi.Any;
 
 namespace API.Data
 {
@@ -23,7 +18,7 @@ namespace API.Data
 
         public async Task<MemberDto> GetMemberAsync(string username)
         {
-            var member = await _context.AppUsers
+            var member = await _context.Users
                         .Where(x => x.UserName == username)
                         .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                         .SingleOrDefaultAsync();
@@ -32,7 +27,7 @@ namespace API.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var query = _context.AppUsers.AsQueryable();
+            var query = _context.Users.AsQueryable();
             //   .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             //   .AsNoTracking()
             //   .AsQueryable();
@@ -77,9 +72,9 @@ namespace API.Data
 
         }
 
-        public async Task<AppUser> GetUserByIdAsync(Guid userId)
+        public async Task<AppUser> GetUserByIdAsync(int userId)
         {
-            var user = await _context.AppUsers.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userId);
             return user;
             // var member = await _context.AppUsers
             //             .Where(x => x.Id == userId)
@@ -92,7 +87,7 @@ namespace API.Data
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
 
-            var singleUserName = await _context.AppUsers
+            var singleUserName = await _context.Users
             .Include(p => p.Photos)
             .SingleOrDefaultAsync(x => x.UserName == username);
             // var anyUserWithTheUserName = await _context.AppUsers.FirstOrDefaultAsync(x=>x.UserName==username);
@@ -101,7 +96,7 @@ namespace API.Data
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            var appUsers = await _context.AppUsers
+            var appUsers = await _context.Users
             .Include(x => x.Photos).ToListAsync();
             return appUsers;
         }

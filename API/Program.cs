@@ -1,16 +1,3 @@
-using System.Text;
-using API.Data;
-using API.Extensions;
-using API.Interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
-
-
 var builder = WebApplication.CreateBuilder(args);
 //Add services to the container.
 
@@ -31,14 +18,14 @@ if (app.Environment.IsDevelopment())
 });
 }
 
-using var scope = app.Services.CreateScope();
+ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
-   
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
+    await Seed.SeedUsers(userManager);
 }
 catch (Exception ex)
 {

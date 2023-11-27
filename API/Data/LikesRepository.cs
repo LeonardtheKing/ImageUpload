@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Data
 {
     public class LikesRepository : ILikesRepository
@@ -12,14 +7,14 @@ namespace API.Data
         {
             _context = context;
         }
-        public async Task<UserLike> GetUserLike(Guid SourceUserId, Guid LikedUserId)
+        public async Task<UserLike> GetUserLike(int SourceUserId, int LikedUserId)
         {
             return await _context.Likes.FindAsync(SourceUserId,LikedUserId);
         }
 
-        public async Task<IEnumerable<LikeDTO>> GetUserLikes(string predicate, Guid userId)
+        public async Task<IEnumerable<LikeDTO>> GetUserLikes(string predicate, int userId)
         {
-            var users = _context.AppUsers.OrderBy(u=>u.UserName).AsQueryable();
+            var users = _context.Users.OrderBy(u=>u.UserName).AsQueryable();
             var likes = _context.Likes.AsQueryable();
 
             if(predicate == "liked")
@@ -46,9 +41,9 @@ namespace API.Data
             }).ToListAsync();
         }
 
-        public async Task<AppUser> GetUserWithLikes(Guid userId)
+        public async Task<AppUser> GetUserWithLikes(int userId)
         {
-            return await _context.AppUsers
+            return await _context.Users
                  .Include(x=>x.LikedUsers)
                  .FirstOrDefaultAsync(x=>x.Id==userId);
         }

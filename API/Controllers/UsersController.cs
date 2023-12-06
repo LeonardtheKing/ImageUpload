@@ -1,5 +1,6 @@
 using API.Helpers;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -27,11 +28,11 @@ namespace API.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
-            userParams.CurrentUsername=user.UserName;
+            userParams.CurrentUsername=User.GetUsername();
             if(string.IsNullOrEmpty(userParams.Gender))
             {
                 userParams.Gender=user.Gender=="male"?"female":"male";
@@ -42,15 +43,14 @@ namespace API.Controllers
         }
 
         // [HttpGet("{username}", Name="GetUser")]
-        [HttpGet]
-        [Route("username", Name = "GetUsers")]
-        [AllowAnonymous]
+        [HttpGet("username")]
+        [Authorize(Roles ="Member")]
         public async Task<ActionResult<MemberDto>>GetUserByUsername(string username)
         {
             // var singleUserName = await _userRepository.GetUserByUsernameAsync(username);
             var singleMember = await _userRepository.GetMemberAsync(username);
             if(singleMember==null){
-                BadRequest();
+                BadRequest("User Not Found");
             }
             // var singleUserToReturn= _mapper.Map<MemberDto>(singleUserName);
             return Ok(singleMember);

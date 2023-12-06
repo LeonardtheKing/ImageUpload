@@ -45,12 +45,16 @@ namespace API.Controllers
             }
             return BadRequest("Failed to like user");
         }
-
+        
+        //Get Liked User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LikeDTO>>> GetUserLike(string predicate)
         {
             var users = await _likesRepository.GetUserLikes(predicate,User.GetUserId());
             return Ok(users);
         }
+
+       
+
     }
 }

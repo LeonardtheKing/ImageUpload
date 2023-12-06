@@ -1,6 +1,7 @@
 using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Data
 {
@@ -8,17 +9,20 @@ namespace API.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
 
 
-        public UserRepository(DataContext context, IMapper mapper)
+        public UserRepository(DataContext context, IMapper mapper, UserManager<AppUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
+
         }
 
         public async Task<MemberDto> GetMemberAsync(string username)
         {
-            var member = await _context.Users
+            var member = await _userManager.Users
                         .Where(x => x.UserName == username)
                         .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                         .SingleOrDefaultAsync();
@@ -46,8 +50,8 @@ namespace API.Data
             {
                 query = query.OrderByDescending(u => u.LastActive);
             }
-             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
-            userParams.PageNumber, userParams.PageSize);
+            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+           userParams.PageNumber, userParams.PageSize);
 
             // IQueryable<AppUser> orderedQuery;
 
@@ -68,7 +72,7 @@ namespace API.Data
             //     "created" => query.OrderByDescending(u=>u.Created),
             //     _=>query.OrderByDescending(u=>u.LastActive)
             // };
-           
+
 
         }
 
@@ -87,10 +91,10 @@ namespace API.Data
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
 
-            var singleUserName = await _context.Users
+            var singleUserName = await _userManager.Users
             .Include(p => p.Photos)
             .SingleOrDefaultAsync(x => x.UserName == username);
-            // var anyUserWithTheUserName = await _context.AppUsers.FirstOrDefaultAsync(x=>x.UserName==username);
+
             return singleUserName;
         }
 
